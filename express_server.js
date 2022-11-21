@@ -7,9 +7,9 @@ app.use(express.static('public'));
 
 let list = [];
 
-list.push( { todo: '음악 듣기', done: 'false' } );
-list.push( { todo: '책 읽기', done: 'false' } );
-list.push( { todo: '글쓰기', done: 'false' } );
+list.push( { todo: '음악 듣기', done: true } );
+list.push( { todo: '책 읽기', done: false } );
+list.push( { todo: '글쓰기', done: false } );
 
 app.get('/todo', (req, res) => {
     res.send(list);

@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo (JS)</title>
+    <style>
+        .done {
+            text-decoration: line-through;
+        }
+    </style>
     <script>
         window.onload = () => {
             const xhr = new XMLHttpRequest();
@@ -17,9 +22,23 @@
                 if(xhr.readyState === 4) {
                     if(xhr.status === 200) {
                         console.log(xhr.responseText);
+
+                        const list = JSON.parse(xhr.responseText);
+
+                        let html = '';
+                        
+                        for (let i = 0; i < list.length; i++) {
+                            html += `<li class="${list[i].done ? 'done' : ''}">${list[i].todo}</li>`;                            
+                        }
+
+                        const display = document.getElementById('display');
+                        display.innerHTML = html;
+                        
                     }
                 }
             }
+
+            xhr.send();
         }
     </script>
 </head>
@@ -35,7 +54,7 @@
     <hr>
     <div>할일 목록</div>
     <div>
-        <ul id="list">
+        <ul id="display">
             <li>할일 없습니다</li>
         </ul>
     </div>
